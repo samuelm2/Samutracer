@@ -161,6 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="GeometricObject.h" />
     <ClInclude Include="HitInfo.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GeometricObject.cpp" />
     <ClCompile Include="HitInfo.cpp" />
     <ClCompile Include="MultiObjectTracer.cpp" />
