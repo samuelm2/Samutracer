@@ -24,6 +24,7 @@ bool Plane::hit(const Ray &r, double & min_t, HitInfo & hit_info) const{
 		hit_info.color = this->color;
 		hit_info.normal = this->normal;
 		hit_info.hit_point = r.origin + r.direction * t;
+		hit_info.did_hit = true;
 		return true;
 	}
 	return false;

@@ -34,6 +34,7 @@ bool Sphere::hit(const Ray &r, double & hit_t, HitInfo & hit_info) const {
 			hit_info.normal = glm::normalize(hit_point - center);
 			hit_info.hit_point = hit_point;
 			hit_info.color = this->color;
+			hit_info.did_hit = true;
 			hit_t = t;
 			return true;
 		}
@@ -42,6 +43,8 @@ bool Sphere::hit(const Ray &r, double & hit_t, HitInfo & hit_info) const {
 			Point3D hit_point = r.origin + t * r.direction;
 			hit_info.normal = glm::normalize(hit_point - center);
 			hit_info.hit_point = hit_point;
+			hit_info.color = this->color;
+			hit_info.did_hit = true;
 			hit_t = t;
 			return true;
 		}

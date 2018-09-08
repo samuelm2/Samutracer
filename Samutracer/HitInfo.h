@@ -5,6 +5,7 @@
 class HitInfo
 {
 public:
+	bool did_hit;
 	Point3D hit_point;
 	Direction normal;
 	RGBColor color;
