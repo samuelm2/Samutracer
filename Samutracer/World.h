@@ -18,7 +18,7 @@ public:
 	std::vector<Light*> lights;
 	Light* ambient;
 	RGBColor background_color;
-	Camera c;
+	Camera camera;
 	Tracer* tracer;
 
 	void build();

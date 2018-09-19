@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ViewPlane.h"
 #include "MultiJitteredSampler.h"
+#include "RegularSampler.h"
 
 ViewPlane::ViewPlane()
 {
@@ -11,6 +12,11 @@ ViewPlane::ViewPlane()
 
 void ViewPlane::set_samples(int s) {
 	num_samples = s;
+	if (s == 1) {
+		this->sampler = new RegularSampler();
+		this->sampler->generate_samples(s, 87);
+		return;
+	}
 	this->sampler = new MultiJitteredSampler();
 	this->sampler->generate_samples(s, 87);
 }
