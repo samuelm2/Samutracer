@@ -167,12 +167,15 @@
     <ClInclude Include="GeometricObject.h" />
     <ClInclude Include="HitInfo.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="MultiJitteredSampler.h" />
     <ClInclude Include="MultiObjectTracer.h" />
+    <ClInclude Include="NRooksSampler.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PhongTracer.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="RawImage.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="Sampler.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Tracer.h" />
     <ClInclude Include="Triangle.h" />
@@ -185,7 +188,9 @@
     <ClCompile Include="GeometricObject.cpp" />
     <ClCompile Include="HitInfo.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="MultiJitteredSampler.cpp" />
     <ClCompile Include="MultiObjectTracer.cpp" />
+    <ClCompile Include="NRooksSampler.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -196,6 +201,7 @@
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="RawImage.cpp" />
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="Samutracer.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Tracer.cpp" />

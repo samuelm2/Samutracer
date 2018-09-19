@@ -1,6 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 #define Point3D glm::dvec3
+#define Point2D glm::dvec2
 #define Direction glm::dvec3
 #define RGBColor glm::vec3
 
