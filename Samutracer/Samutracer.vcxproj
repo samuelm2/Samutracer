@@ -171,6 +171,7 @@
     <ClInclude Include="MultiObjectTracer.h" />
     <ClInclude Include="NRooksSampler.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PerspectivePinhole.h" />
     <ClInclude Include="PhongTracer.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="RawImage.h" />
@@ -198,6 +199,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="PerspectivePinhole.cpp" />
     <ClCompile Include="PhongTracer.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="RawImage.cpp" />

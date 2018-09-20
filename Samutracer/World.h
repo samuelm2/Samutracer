@@ -11,6 +11,8 @@
 #include "DirectionalLight.h"
 class Tracer;
 #include "Tracer.h"
+class Camera;
+#include "Camera.h"
 class World
 {
 public:
@@ -18,7 +20,7 @@ public:
 	std::vector<Light*> lights;
 	Light* ambient;
 	RGBColor background_color;
-	Camera camera;
+	Camera* camera;
 	Tracer* tracer;
 
 	void build();
