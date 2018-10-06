@@ -161,12 +161,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AmbientLight.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="GeometricObject.h" />
     <ClInclude Include="HitInfo.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="MultiJitteredSampler.h" />
     <ClInclude Include="MultiObjectTracer.h" />
     <ClInclude Include="NRooksSampler.h" />
@@ -174,6 +176,7 @@
     <ClInclude Include="PerspectivePinhole.h" />
     <ClInclude Include="PhongTracer.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="RawImage.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="RegularSampler.h" />
@@ -185,11 +188,13 @@
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AmbientLight.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="GeometricObject.cpp" />
     <ClCompile Include="HitInfo.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MultiJitteredSampler.cpp" />
     <ClCompile Include="MultiObjectTracer.cpp" />
     <ClCompile Include="NRooksSampler.cpp" />
@@ -202,6 +207,7 @@
     <ClCompile Include="PerspectivePinhole.cpp" />
     <ClCompile Include="PhongTracer.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="RawImage.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RegularSampler.cpp" />

@@ -10,6 +10,7 @@ public:
 	Direction normal;
 
 	bool hit(const Ray &r, double & min_t, HitInfo & hit_info) const;
+	bool shadow_hit(const Ray &r, double & min_t) const;
 	Triangle(const Point3D & a, const Point3D &b, const Point3D & c);
 	Triangle();
 	~Triangle();

@@ -5,6 +5,8 @@ class Plane :
 {
 public:
 	bool hit(const Ray &r, double & min_t, HitInfo & hit_info) const;
+	bool shadow_hit(const Ray &r, double & min_t) const;
+
 	Point3D point;
 	Direction normal;
 

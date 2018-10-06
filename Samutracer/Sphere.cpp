@@ -51,3 +51,30 @@ bool Sphere::hit(const Ray &r, double & hit_t, HitInfo & hit_info) const {
 	}
 	return false;
 }
+
+bool Sphere::shadow_hit(const Ray & r, double & min_t) const
+{
+	Direction o_minus_c = r.origin - this->center;
+	double a = glm::dot(r.direction, r.direction);
+	double b = glm::dot((2. * (o_minus_c)), r.direction);
+	double c = glm::dot(o_minus_c, o_minus_c) - (this->radius * this->radius);
+
+	double disc = b * b - 4 * a*c;
+
+	if (disc < 0.) {
+		return false;
+	}
+	else {
+		double sqrt_disc = glm::sqrt(disc);
+		double t = (-b - sqrt_disc) / (2 * a);
+		if (t > TINY_DOUBLE && t < min_t) {
+
+			return true;
+		}
+		t = (-b + sqrt_disc) / (2 * a);
+		if (t > TINY_DOUBLE && t < min_t) {
+			return true;
+		}
+	}
+	return false;
+}

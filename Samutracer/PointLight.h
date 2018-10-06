@@ -1,18 +1,18 @@
 #pragma once
 #include "Light.h"
-class DirectionalLight :
+class PointLight :
 	public Light
 {
 public:
+	Point3D position;
 	RGBColor color;
 	float scalar;
-	Direction direction;
 
 	Direction get_direction(const HitInfo & hit_info) const;
 	RGBColor L(HitInfo & hit_info) const;
 
-	DirectionalLight(const RGBColor & color, float scalar, const Direction & direction);
-	DirectionalLight();
-	~DirectionalLight();
+	PointLight();
+	PointLight(const Point3D & position, const RGBColor & color, float scalar);
+	~PointLight();
 };
 

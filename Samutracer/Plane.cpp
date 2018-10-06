@@ -15,6 +15,7 @@ Plane::Plane(const Point3D & a, const Direction & normal)
 
 Plane::~Plane()
 {
+
 }
 
 bool Plane::hit(const Ray &r, double & min_t, HitInfo & hit_info) const{
@@ -25,6 +26,15 @@ bool Plane::hit(const Ray &r, double & min_t, HitInfo & hit_info) const{
 		hit_info.normal = this->normal;
 		hit_info.hit_point = r.origin + r.direction * t;
 		hit_info.did_hit = true;
+		return true;
+	}
+	return false;
+}
+
+bool Plane::shadow_hit(const Ray & r, double & min_t) const
+{
+	double t = glm::dot((this->point - r.origin), this->normal) / (glm::dot(r.direction, this->normal));
+	if (t > TINY_DOUBLE && t < min_t && t != INFINITY && t != -INFINITY) {
 		return true;
 	}
 	return false;

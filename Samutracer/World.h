@@ -8,7 +8,8 @@
 #include "RawImage.h"
 #include "Camera.h"
 #include "Light.h"
-#include "DirectionalLight.h"
+#include "PointLight.h"
+#include "AmbientLight.h"
 class Tracer;
 #include "Tracer.h"
 class Camera;
@@ -18,7 +19,7 @@ class World
 public:
 	std::vector<GeometricObject*> objects;
 	std::vector<Light*> lights;
-	Light* ambient;
+	AmbientLight* ambient;
 	RGBColor background_color;
 	Camera* camera;
 	Tracer* tracer;

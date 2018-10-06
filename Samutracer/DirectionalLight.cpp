@@ -2,7 +2,7 @@
 #include "DirectionalLight.h"
 
 
-Direction DirectionalLight::get_direction(HitInfo & hit_info) const
+Direction DirectionalLight::get_direction(const HitInfo & hit_info) const
 {
 	return this->direction;
 }
@@ -12,8 +12,9 @@ RGBColor DirectionalLight::L(HitInfo & hit_info) const
 	return this->scalar * this->color;
 }
 
-DirectionalLight::DirectionalLight(const RGBColor & color, float scalar, const Direction & direction) : color(color), scalar(scalar), direction(direction)
+DirectionalLight::DirectionalLight(const RGBColor & color, float scalar, const Direction & direction) : color(color), scalar(scalar)
 {
+	this->direction = glm::normalize(direction);
 }
 
 DirectionalLight::DirectionalLight()
