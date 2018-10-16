@@ -1,21 +1,18 @@
 #pragma once
 #include "GeometricObject.h"
-class Triangle :
+#include "Mesh.h"
+class MeshTriangle :
 	public GeometricObject
 {
 public:
-	Point3D p1;
-	Point3D p2;
-	Point3D p3;
+	Mesh* mesh;
+	int index1, index2, index3;
 	Direction normal;
 
+	BoundingBox getBBox() const;
 	bool hit(const Ray &r, double & min_t, HitInfo & hit_info) const;
 	bool shadow_hit(const Ray &r, double & min_t) const;
-
-	BoundingBox getBBox() const;
-
-	Triangle(const Point3D & a, const Point3D &b, const Point3D & c);
-	Triangle();
-	~Triangle();
+	MeshTriangle(Mesh* mesh);
+	~MeshTriangle();
 };
 

@@ -8,6 +8,7 @@ RGBColor PhongTracer::trace_ray(const Ray & ray) const
 	RGBColor current = RGBColor(0.,0.,0.);
 
 	if (h.did_hit) {
+		//return h;
 		for (auto it = world->lights.begin(); it != world->lights.end(); it++) {
 			if (!is_in_shadow(h, (**it))) {
 				current += (float)(glm::dot(h.normal, -glm::normalize((*it)->get_direction(h)))) * (*it)->L(h) * h.color;
@@ -27,10 +28,12 @@ bool PhongTracer::is_in_shadow(const HitInfo & h, const Light & l) const {
 	Point3D origin = h.hit_point;
 	Direction direction = -(l.get_direction(h));
 	double min_t = glm::length(direction);
+	double smin = MAX_DOUBLE;
 	Ray r = Ray(origin, glm::normalize(direction));
 
-	for (auto it = world->objects.begin(); it != world->objects.end(); it++) {
-		if ((*it)->shadow_hit(r, min_t)) {
+	HitInfo h2 = HitInfo();
+	if (world->bvh.hit(r, smin, h2)) {
+		if (smin < min_t) {
 			return true;
 		}
 	}

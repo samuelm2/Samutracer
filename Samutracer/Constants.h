@@ -11,4 +11,4 @@ const RGBColor zero = RGBColor(0., 0., 0.);
 const RGBColor one = RGBColor(1., 1., 1.);
 
 const double MAX_DOUBLE = 1.0e+100;
-const double TINY_DOUBLE = 0.00001;
+const double TINY_DOUBLE = 0.001;

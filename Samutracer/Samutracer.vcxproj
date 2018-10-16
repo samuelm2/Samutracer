@@ -162,16 +162,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AmbientLight.h" />
+    <ClInclude Include="BoundingBox.h" />
+    <ClInclude Include="BVHAccelerator.h" />
+    <ClInclude Include="BVHBuildNode.h" />
+    <ClInclude Include="BVHObjectInfo.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="GeometricObject.h" />
     <ClInclude Include="HitInfo.h" />
+    <ClInclude Include="Instance.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="LinearBVHNode.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshInstance.h" />
+    <ClInclude Include="MeshTriangle.h" />
+    <ClInclude Include="MidpointComparer.h" />
     <ClInclude Include="MultiJitteredSampler.h" />
     <ClInclude Include="MultiObjectTracer.h" />
     <ClInclude Include="NRooksSampler.h" />
+    <ClInclude Include="ObjLoader.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PerspectivePinhole.h" />
     <ClInclude Include="PhongTracer.h" />
@@ -189,15 +199,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AmbientLight.cpp" />
+    <ClCompile Include="BoundingBox.cpp" />
+    <ClCompile Include="BVHAccelerator.cpp" />
+    <ClCompile Include="BVHBuildNode.cpp" />
+    <ClCompile Include="BVHObjectInfo.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="GeometricObject.cpp" />
     <ClCompile Include="HitInfo.cpp" />
+    <ClCompile Include="Instance.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="LinearBVHNode.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshInstance.cpp" />
+    <ClCompile Include="MeshTriangle.cpp" />
+    <ClCompile Include="MidpointComparer.cpp" />
     <ClCompile Include="MultiJitteredSampler.cpp" />
     <ClCompile Include="MultiObjectTracer.cpp" />
     <ClCompile Include="NRooksSampler.cpp" />
+    <ClCompile Include="ObjLoader.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

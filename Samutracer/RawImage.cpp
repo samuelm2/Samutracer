@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "RawImage.h"
-
+#include <iostream>
 
 
 void RawImage::set_pixel(int x, int y, const RGBColor & color)
@@ -13,9 +13,12 @@ void RawImage::set_pixel(int x, int y, const RGBColor & color)
 	
 	bmp.set_pixel(x, y, char_r, char_g, char_b);
 	this->pixels_written++;
-	/*if (!(this->pixels_written++ % 100)) {
-		bmp.save_image(this->name);
-	}*/
+	
+	
+	//if (!(this->pixels_written % 500)) {
+	//	std::cout << "Saving image iteration" << std::endl;
+	//	bmp.save_image(this->name);
+	//}
 }
 
 void RawImage::export_image() const

@@ -4,25 +4,54 @@
 #include "PhongTracer.h"
 #include "PerspectivePinhole.h"
 #include "DirectionalLight.h"
+#include "Mesh.h"
+#include "MeshInstance.h"
+#include "glm/gtc/matrix_transform.hpp"
 
 
 void World::build()
 {
 
-	view_plane.set_samples(16);
-	this->camera = new PerspectivePinhole(Point3D(200., 0., 200.), Point3D(0., 0., -150.), Point3D(0., 1., 0.), 200) ;
+	view_plane.set_samples(4);
+	this->camera = new PerspectivePinhole(Point3D(0., 0., 200.), Point3D(0., 0., -150.), Point3D(0., 1., 0.), 200) ;
 	//this->background_color = RGBColor(0.1, 0.1, 0.1);
 	this->tracer = new PhongTracer(this);
 
 	//DirectionalLight* l = new DirectionalLight( RGBColor(1.0, 1.0, 1.0), 1., Direction(0., -1., -0.4));
-	PointLight* l = new PointLight(Point3D(0., 250., 1000.), RGBColor(1., 1., 1.), 1.);
+	PointLight* l = new PointLight(Point3D(0., 1000., 1000.), RGBColor(1., 1., 1.), 1.);
 	this->add_light(l);
 
 	ambient = new AmbientLight();
+	Mesh* m = new Mesh("teapot.obj");
+	MeshInstance* mesh = new MeshInstance(m);
+	mesh->scale(30., 30., 30.);
+	mesh->translate(0, -30, 0);
+	mesh->set_transform();
+	
+	mesh->add_geometry(this);
 
-	Sphere* s = new Sphere(Point3D(0., 0., -150.), 80.);
-	s->color = RGBColor(1., 0., 0.);
-	this->add_object(s);
+	//MeshInstance* m2 = new MeshInstance(m);
+	//m2->translate(0, 5, 150);
+	//m2->set_transform();
+	//m2->add_geometry(this);
+	
+	
+	//for (int i = 0; i < 22; i++) {
+	//	for (int j = 0; j < 22; j++) {
+	//		for (int k = 0; k < 22; k++) {
+	//			double x = 5 * i - 50;
+	//			double y = 5 * j - 75 + 2*k;
+	//			double z = -5 * k;
+	//			Sphere* s = new Sphere(Point3D(x, y, z), 3.);
+	//			s->color = RGBColor(1., 0., 0.);
+	//			this->add_object(s);
+	//		}
+	//	}
+	//}
+
+	//Sphere* s = new Sphere(Point3D(0., 0., -150.), 80.);
+	//s->color = RGBColor(1., 0., 0.);
+	//this->add_object(s);
 
 	/*Sphere* s2 = new Sphere(Point3D(20., -70, -40.), 40.);
 	s2->color = RGBColor(0., 0., 1.);
@@ -32,15 +61,17 @@ void World::build()
 	t1->color = RGBColor(1., 0., 1.);
 	this->add_object(t1);*/
 
-	Triangle* t = new Triangle(Point3D(-70., -40., -40.), Point3D(70., -40., -40.), Point3D(60., 60., -40.));
-	t->color = RGBColor(0., 0., 1.);
-	this->add_object(t);
+	//Triangle* t = new Triangle(Point3D(-70., -40., -40.), Point3D(70., -40., -40.), Point3D(60., 60., -40.));
+	//t->color = RGBColor(0., 0., 1.);
+	//this->add_object(t);
 
-	Plane* p = new Plane(Point3D(0., -120., 0.), glm::normalize(Direction(0., 1., 0.)));
-	p->color = RGBColor(0., 1., 0.);
-	this->add_object(p);
+	bvh = BVHAccelerator(objects, 1);
+
+	plane = new Plane(Point3D(0., -120., 0.), glm::normalize(Direction(0., 1., 0.)));
+	plane->color = RGBColor(0., 1., 0.);
 }
 
+//deprecated
 void World::render_scene(RawImage & raw_image) const
 {
 	double x;
@@ -120,7 +151,7 @@ void World::set_resolution(int hres, int vres, double pixel_size)
 
 HitInfo World::hit_objects(const Ray & ray) const
 {
-	double minimum_t = MAX_DOUBLE;
+	/*double minimum_t = MAX_DOUBLE;
 	HitInfo h = HitInfo();
 	RGBColor curr = RGBColor();
 	Direction curr_normal = Direction();
@@ -139,7 +170,26 @@ HitInfo World::hit_objects(const Ray & ray) const
 		h.color = curr;
 		h.normal = curr_normal;
 	}
-	return h;
+
+	return h;*/
+	HitInfo h = HitInfo();
+	double min_t = MAX_DOUBLE;
+	Direction new_dir = glm::normalize(ray.direction);
+	Ray new_ray = Ray(ray);
+	new_ray.direction = new_dir;
+	bvh.hit(new_ray, min_t, h);
+
+	HitInfo plane_h = HitInfo();
+	double plane_min_t = MAX_DOUBLE;
+	if (plane) {
+		plane->hit(new_ray, plane_min_t, plane_h);
+	}
+
+
+	if (plane_h.did_hit) {
+		return (min_t < plane_min_t) ? h : plane_h;
+	}
+	else return h;
 }
 
 World::World(const RGBColor & color)

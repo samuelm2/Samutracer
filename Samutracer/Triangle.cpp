@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "Triangle.h"
+#include <algorithm>
+
 
 
 bool Triangle::hit(const Ray &r, double & min_t, HitInfo & hit_info) const {
@@ -81,7 +83,21 @@ bool Triangle::shadow_hit(const Ray & r, double & min_t) const
 	if (t < TINY_DOUBLE || t > min_t) {
 		return false;
 	}
-	
+	return true;
+}
+
+BoundingBox Triangle::getBBox() const
+{
+	double minx = std::min(p1.x, std::min(p2.x, p3.x));
+	double miny = std::min(p1.y, std::min(p2.y, p3.y));
+	double minz = std::min(p1.z, std::min(p2.z, p3.z));
+
+	double maxx = std::max(p1.x, std::max(p2.x, p3.x));
+	double maxy = std::max(p1.y, std::max(p2.y, p3.y));
+	double maxz = std::max(p1.z, std::max(p2.z, p3.z));
+
+
+	return BoundingBox(Point3D(minx, miny, minz), Point3D(maxx, maxy, maxz));
 }
 
 Triangle::Triangle(const Point3D & a, const Point3D & b, const Point3D & c) : p1(a), p2(b), p3(c)

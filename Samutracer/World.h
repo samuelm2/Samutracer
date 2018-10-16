@@ -14,6 +14,7 @@ class Tracer;
 #include "Tracer.h"
 class Camera;
 #include "Camera.h"
+#include "BVHAccelerator.h"
 class World
 {
 public:
@@ -23,6 +24,8 @@ public:
 	RGBColor background_color;
 	Camera* camera;
 	Tracer* tracer;
+	Plane* plane;
+	BVHAccelerator bvh;
 
 	void build();
 	void render_scene(RawImage & r) const;

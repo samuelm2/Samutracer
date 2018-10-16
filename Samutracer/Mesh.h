@@ -4,15 +4,13 @@
 #include <string>
 
 
-class Mesh :
-	public GeometricObject
+class Mesh
 {
 public:
-	void add_geometry(World* world);
 	Mesh(std::string file_path);
+	std::vector<int> indices;
+	std::vector<Point3D> vertices;
+
 	~Mesh();
-	std::vector<tinyobj::shape_t>* shapes;
-	std::vector<tinyobj::material_t>* materials;
-	tinyobj::attrib_t* attrib;
 };
 

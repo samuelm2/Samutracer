@@ -78,3 +78,8 @@ bool Sphere::shadow_hit(const Ray & r, double & min_t) const
 	}
 	return false;
 }
+
+BoundingBox Sphere::getBBox() const
+{
+	return BoundingBox(center - radius, center + radius);
+}

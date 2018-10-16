@@ -39,3 +39,8 @@ bool Plane::shadow_hit(const Ray & r, double & min_t) const
 	}
 	return false;
 }
+
+BoundingBox Plane::getBBox() const
+{
+	return BoundingBox();
+}
