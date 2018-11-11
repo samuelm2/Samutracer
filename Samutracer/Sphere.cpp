@@ -4,10 +4,12 @@
 Sphere::Sphere(const Point3D & center, double radius) {
 	this->center = Point3D(center);
 	this->radius = radius;
+	this->is_reflective = false;
 }
 
 Sphere::Sphere() : Sphere(Point3D(0., 0., 0.), 0.)
 {
+	this->is_reflective = false;
 }
 
 
@@ -36,6 +38,8 @@ bool Sphere::hit(const Ray &r, double & hit_t, HitInfo & hit_info) const {
 			hit_info.color = this->color;
 			hit_info.did_hit = true;
 			hit_t = t;
+			hit_info.is_reflective = is_reflective;
+			hit_info.is_transparent = is_transparent;
 			return true;
 		}
 		t = (-b + sqrt_disc) / (2 * a);
@@ -46,6 +50,8 @@ bool Sphere::hit(const Ray &r, double & hit_t, HitInfo & hit_info) const {
 			hit_info.color = this->color;
 			hit_info.did_hit = true;
 			hit_t = t;
+			hit_info.is_reflective = is_reflective;
+			hit_info.is_transparent = is_transparent;
 			return true;
 		}
 	}

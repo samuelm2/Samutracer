@@ -60,6 +60,8 @@ bool BVHAccelerator::hit(const Ray & r, double & min_t, HitInfo & hit_info) cons
 	int todo_offset = 0, node_num = 0;
 	int todo[64];
 
+	bool is_reflective = false;
+	bool is_transparent = false;
 	double curr_t = MAX_DOUBLE;
 	double minimum_t = MAX_DOUBLE;
 	RGBColor curr = RGBColor();
@@ -73,11 +75,13 @@ bool BVHAccelerator::hit(const Ray & r, double & min_t, HitInfo & hit_info) cons
 				
 				//std::cout << "checking children" << std::endl;
 				for (int i = 0; i < node->num_objs; i++) {
-					if (objs[node->obj_offset + i]->hit(r, curr_t, hit_info) && curr_t < minimum_t) {
+					if (objs[node->obj_offset + i]->hit(r, curr_t, hit_info) && curr_t < minimum_t && curr_t > 0) {
 						minimum_t = curr_t;
 						curr = hit_info.color;
 						curr_normal = hit_info.normal;
 						hit = true;
+						is_reflective = hit_info.is_reflective;
+						is_transparent = hit_info.is_transparent;
 					}
 				}
 				if (todo_offset == 0) break;
@@ -107,6 +111,9 @@ bool BVHAccelerator::hit(const Ray & r, double & min_t, HitInfo & hit_info) cons
 	hit_info.color = curr;
 	hit_info.normal = curr_normal;
 	min_t = minimum_t;
+	hit_info.is_reflective = is_reflective;
+	hit_info.is_transparent = is_transparent;
+
 	return hit;
 }
 

@@ -13,7 +13,7 @@ void World::build()
 {
 
 	view_plane.set_samples(4);
-	this->camera = new PerspectivePinhole(Point3D(0., 0., 200.), Point3D(0., 0., -150.), Point3D(0., 1., 0.), 200) ;
+	this->camera = new PerspectivePinhole(Point3D(30, -5., 200.), Point3D(30., -5., -150.), Point3D(0., 1., 0.), 200) ;
 	//this->background_color = RGBColor(0.1, 0.1, 0.1);
 	this->tracer = new PhongTracer(this);
 
@@ -22,13 +22,13 @@ void World::build()
 	this->add_light(l);
 
 	ambient = new AmbientLight();
-	Mesh* m = new Mesh("teapot.obj");
-	MeshInstance* mesh = new MeshInstance(m);
-	mesh->scale(30., 30., 30.);
-	mesh->translate(0, -30, 0);
-	mesh->set_transform();
+	//Mesh* m = new Mesh("teapot.obj");
+	//MeshInstance* mesh = new MeshInstance(m);
+	//mesh->scale(30., 30., 30.);
+	//mesh->translate(0, -30, 0);
+	//mesh->set_transform();
 	
-	mesh->add_geometry(this);
+	//mesh->add_geometry(this);
 
 	//MeshInstance* m2 = new MeshInstance(m);
 	//m2->translate(0, 5, 150);
@@ -49,20 +49,32 @@ void World::build()
 	//	}
 	//}
 
-	//Sphere* s = new Sphere(Point3D(0., 0., -150.), 80.);
-	//s->color = RGBColor(1., 0., 0.);
-	//this->add_object(s);
+	Sphere* s = new Sphere(Point3D(0., 0., -150.), 80.);
+	s->color = RGBColor(0.0, 0.0, 0.2);
+	s->is_transparent = true;
+	this->add_object(s);
 
-	/*Sphere* s2 = new Sphere(Point3D(20., -70, -40.), 40.);
-	s2->color = RGBColor(0., 0., 1.);
+
+	Sphere* s2 = new Sphere(Point3D(50, 50, -400.), 95);
+	s2->color = RGBColor(1., 0., 0.);
 	this->add_object(s2);
 
-	*//*Triangle* t1 = new Triangle(Point3D(20., -70, -40.), Point3D(0., 60., -150.), Point3D(-100., 0., 0.));
-	t1->color = RGBColor(1., 0., 1.);
-	this->add_object(t1);*/
+	//Sphere* s3 = new Sphere(Point3D(0., 100, -80.), 30.);
+	//s3->color = RGBColor(1., 0., 0.);
+	//this->add_object(s3);
+	//
+	//Sphere* s4 = new Sphere(Point3D(120., 0., -150.), 30.);
+	//s4->color = RGBColor(1., 0., 1.);
+	////s4->is_reflective = true;
+	//this->add_object(s4);
 
-	//Triangle* t = new Triangle(Point3D(-70., -40., -40.), Point3D(70., -40., -40.), Point3D(60., 60., -40.));
+	///Triangle* t1 = new Triangle(Point3D(1000., 0., 1001.), Point3D(0., 1000., 1001.), Point3D(-1000., 0., 1001.));
+	//t1->color = RGBColor(1., 0., 1.);
+	//this->add_object(t1);
+
+	//Triangle* t = new Triangle(Point3D(-20., 60., 50.), Point3D(70., -40., -40.), Point3D(60., 60., -40.));
 	//t->color = RGBColor(0., 0., 1.);
+	//t->is_reflective = false;
 	//this->add_object(t);
 
 	bvh = BVHAccelerator(objects, 1);
@@ -91,7 +103,7 @@ void World::render_scene(RawImage & raw_image) const
 				y = view_plane.pixel_size * (i - 0.5 * view_plane.vres + sample_point.y);
 				r.origin.x = x;
 				r.origin.y = y;
-				curr += tracer->trace_ray(r);
+				curr += tracer->trace_ray(r, 4, .75);
 			}
 
 			raw_image.set_pixel(j, i, curr / (float)view_plane.num_samples);

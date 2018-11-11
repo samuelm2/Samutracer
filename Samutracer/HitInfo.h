@@ -10,6 +10,8 @@ public:
 	Direction normal;
 	RGBColor color;
 
+	bool is_reflective;
+	bool is_transparent;
 
 	HitInfo();
 	HitInfo(const RGBColor & color);

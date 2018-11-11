@@ -21,13 +21,14 @@ void PerspectivePinhole::render_scene(const World* world, RawImage & raw_image)
 				pixel_location.x = world->view_plane.pixel_size * (j - 0.5 * world->view_plane.hres + sample_point.x);
 				pixel_location.y = world->view_plane.pixel_size * (i - 0.5 * world->view_plane.vres + sample_point.y);
 				r.direction = calculate_ray_direction(pixel_location.x, pixel_location.y);
-				curr += world->tracer->trace_ray(r);
+				curr += world->tracer->trace_ray(r, 6, .75);
 			}
 
 			raw_image.set_pixel(j, i, curr / (float)world->view_plane.num_samples);
 
 		}
 	}
+	std::cout << "Number of rays traced: " << world->tracer->get_num_traced() << std::endl;
 }
 
 Direction PerspectivePinhole::calculate_ray_direction(double x, double y) const {
