@@ -62,10 +62,14 @@ bool BVHAccelerator::hit(const Ray & r, double & min_t, HitInfo & hit_info) cons
 
 	bool is_reflective = false;
 	bool is_transparent = false;
+	bool is_light = false;
+	bool is_procedural = false;
+	bool is_noise = false;
 	double curr_t = MAX_DOUBLE;
 	double minimum_t = MAX_DOUBLE;
 	RGBColor curr = RGBColor();
 	Direction curr_normal = Direction();
+	Direction curr_normal2 = Direction();
 	//std::cout << "entering loop" << std::endl;
 	while (true) {
 		const LinearBVHNode *node = &nodes[node_num];
@@ -79,9 +83,13 @@ bool BVHAccelerator::hit(const Ray & r, double & min_t, HitInfo & hit_info) cons
 						minimum_t = curr_t;
 						curr = hit_info.color;
 						curr_normal = hit_info.normal;
+						curr_normal2 = hit_info.normal2;
 						hit = true;
 						is_reflective = hit_info.is_reflective;
 						is_transparent = hit_info.is_transparent;
+						is_light = hit_info.is_light;
+						is_procedural = hit_info.is_procedural;
+						is_noise = hit_info.is_noise;
 					}
 				}
 				if (todo_offset == 0) break;
@@ -113,6 +121,9 @@ bool BVHAccelerator::hit(const Ray & r, double & min_t, HitInfo & hit_info) cons
 	min_t = minimum_t;
 	hit_info.is_reflective = is_reflective;
 	hit_info.is_transparent = is_transparent;
+	hit_info.is_light = is_light;
+	hit_info.is_noise = is_noise;
+	hit_info.is_procedural = is_procedural;
 
 	return hit;
 }

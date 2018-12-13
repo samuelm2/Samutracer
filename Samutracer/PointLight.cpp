@@ -7,6 +7,11 @@ Direction PointLight::get_direction(const HitInfo & hit_info) const
 	return hit_info.hit_point - position;
 }
 
+Direction PointLight::get_direction_deterministic(const HitInfo & hit_info) const
+{
+	return hit_info.hit_point - position;
+}
+
 RGBColor PointLight::L(HitInfo & hit_info) const
 {
 	return scalar * color;

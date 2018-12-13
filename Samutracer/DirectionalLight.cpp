@@ -2,6 +2,11 @@
 #include "DirectionalLight.h"
 
 
+Direction DirectionalLight::get_direction_deterministic(const HitInfo & hit_info) const
+{
+	return this->direction;
+}
+
 Direction DirectionalLight::get_direction(const HitInfo & hit_info) const
 {
 	return this->direction;

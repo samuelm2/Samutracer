@@ -162,12 +162,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AmbientLight.h" />
+    <ClInclude Include="AreaLight.h" />
     <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="BVHAccelerator.h" />
     <ClInclude Include="BVHBuildNode.h" />
     <ClInclude Include="BVHObjectInfo.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="CSG.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="GeometricObject.h" />
     <ClInclude Include="HitInfo.h" />
@@ -189,6 +191,7 @@
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="RawImage.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RegularSampler.h" />
     <ClInclude Include="Sampler.h" />
     <ClInclude Include="Sphere.h" />
@@ -199,11 +202,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AmbientLight.cpp" />
+    <ClCompile Include="AreaLight.cpp" />
     <ClCompile Include="BoundingBox.cpp" />
     <ClCompile Include="BVHAccelerator.cpp" />
     <ClCompile Include="BVHBuildNode.cpp" />
     <ClCompile Include="BVHObjectInfo.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CSG.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="GeometricObject.cpp" />
     <ClCompile Include="HitInfo.cpp" />
@@ -230,6 +235,7 @@
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="RawImage.cpp" />
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="RegularSampler.cpp" />
     <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="Samutracer.cpp" />

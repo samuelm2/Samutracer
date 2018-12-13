@@ -9,6 +9,10 @@ public:
 	RGBColor color;
 	bool is_reflective;
 	bool is_transparent;
+	bool is_light;
+	bool is_procedural;
+	bool is_noise;
+
 	virtual BoundingBox getBBox() const = 0;
 	virtual bool hit(const Ray &r, double & min_t, HitInfo & hit_info) const = 0;
 	virtual bool shadow_hit(const Ray &r, double & min_t) const = 0;

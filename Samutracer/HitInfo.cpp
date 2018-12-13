@@ -7,6 +7,9 @@ HitInfo::HitInfo()
 	this->did_hit = false;
 	this->is_reflective = false;
 	this->is_transparent = false;
+	this->is_light = false;
+	this->is_procedural = false;
+	this->is_noise = false;
 }
 
 HitInfo::HitInfo(const RGBColor & color) {
@@ -15,6 +18,9 @@ HitInfo::HitInfo(const RGBColor & color) {
 	this->did_hit = false;
 	this->is_reflective = false;
 	this->is_transparent = false;
+	this->is_light = false;
+	this->is_procedural = false;
+	this->is_noise = false;
 }
 
 HitInfo::~HitInfo()

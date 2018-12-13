@@ -9,6 +9,7 @@ public:
 	float scalar;
 
 	Direction get_direction(const HitInfo & hit_info) const;
+	Direction get_direction_deterministic(const HitInfo & hit_info) const;
 	RGBColor L(HitInfo & hit_info) const;
 
 	PointLight();

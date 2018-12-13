@@ -3,23 +3,30 @@
 #include "MultiObjectTracer.h"
 #include "PhongTracer.h"
 #include "PerspectivePinhole.h"
+#include "CSG.h"
 #include "DirectionalLight.h"
 #include "Mesh.h"
 #include "MeshInstance.h"
+#include "AreaLight.h"
 #include "glm/gtc/matrix_transform.hpp"
 
 
 void World::build()
 {
 
-	view_plane.set_samples(4);
-	this->camera = new PerspectivePinhole(Point3D(30, -5., 200.), Point3D(30., -5., -150.), Point3D(0., 1., 0.), 200) ;
+	view_plane.set_samples(64);
+	this->camera = new PerspectivePinhole(Point3D(-100, 46, 200.), Point3D(0., 46., 0.), Point3D(0., 1., 0.), 200) ;
 	//this->background_color = RGBColor(0.1, 0.1, 0.1);
 	this->tracer = new PhongTracer(this);
 
 	//DirectionalLight* l = new DirectionalLight( RGBColor(1.0, 1.0, 1.0), 1., Direction(0., -1., -0.4));
-	PointLight* l = new PointLight(Point3D(0., 1000., 1000.), RGBColor(1., 1., 1.), 1.);
+	//PointLight* l = new PointLight(Point3D(0., 1000., 1000.), RGBColor(1., 1., 1.), 1.);
+	PointLight * l = new PointLight(Point3D(0., 1000, 1000.), RGBColor(1., 1., 1.), 1.);
 	this->add_light(l);
+
+	//AreaLight * l2 = new AreaLight(Point3D(0., 150, -150), 10, RGBColor(1., 1., 1.));
+	//l2->is_light = true;
+	//this->add_object(l2);
 
 	ambient = new AmbientLight();
 	//Mesh* m = new Mesh("teapot.obj");
@@ -37,7 +44,7 @@ void World::build()
 	
 	
 	//for (int i = 0; i < 22; i++) {
-	//	for (int j = 0; j < 22; j++) {
+	//	for (int j = 0; j < 22; j++) { se
 	//		for (int k = 0; k < 22; k++) {
 	//			double x = 5 * i - 50;
 	//			double y = 5 * j - 75 + 2*k;
@@ -49,15 +56,26 @@ void World::build()
 	//	}
 	//}
 
-	Sphere* s = new Sphere(Point3D(0., 0., -150.), 80.);
-	s->color = RGBColor(0.0, 0.0, 0.2);
-	s->is_transparent = true;
-	this->add_object(s);
+	Sphere* s = new Sphere(Point3D(40., 0., 0.), 60.);
+	s->color = RGBColor(0.0, 0.0, 1.);
+	//s->is_noise = true;
+	//s->is_transparent = true;
+	//this->add_object(s);
 
+	Sphere* s2 = new Sphere(Point3D(-40., 0., 0.), 60.);
+	s2->color = RGBColor(1.0, 0.0, 0.);
+	//s->is_transparent = true;
+	//this->add_object(s2);
 
-	Sphere* s2 = new Sphere(Point3D(50, 50, -400.), 95);
-	s2->color = RGBColor(1., 0., 0.);
-	this->add_object(s2);
+	CSG * c = new CSG();
+	c->o1 = s;
+	c->o2 = s2;
+	c->op = SUBTRACTION;
+
+	this->add_object(c);
+	//Sphere* s2 = new Sphere(Point3D(50, 50, -400.), 95);
+	//s2->color = RGBColor(1., 0., 0.);
+	//this->add_object(s2);
 
 	//Sphere* s3 = new Sphere(Point3D(0., 100, -80.), 30.);
 	//s3->color = RGBColor(1., 0., 0.);
@@ -80,6 +98,7 @@ void World::build()
 	bvh = BVHAccelerator(objects, 1);
 
 	plane = new Plane(Point3D(0., -120., 0.), glm::normalize(Direction(0., 1., 0.)));
+	//plane->is_procedural = true;
 	plane->color = RGBColor(0., 1., 0.);
 }
 

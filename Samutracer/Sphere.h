@@ -13,6 +13,8 @@ public:
 	Sphere();
 	Sphere(const Sphere & rhs) = default;
 	~Sphere();
+	bool hit2(const Ray & r, glm::vec2 & hit_t, HitInfo & hit_info) const;
+
 protected:
 	Point3D center;
 	double radius;
